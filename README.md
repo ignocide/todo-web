@@ -1,26 +1,11 @@
 # todo-client
 
-## Project setup
-```
-yarn install
-```
+made by vue
+client side of todo-service
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+### The purpose of this project is to:
 
-### Lints and fixes files
-```
-yarn run lint
-```
+* study of vue.js
+* personal useage
 
-### Run your unit tests
-```
-yarn run test:unit
-```
