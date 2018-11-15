@@ -1,6 +1,6 @@
 # todo-client
 
-made by vue
+made by vue  
 client side of todo-service
 
 
@@ -8,4 +8,3 @@ client side of todo-service
 
 * study of vue.js
 * personal useage
-
