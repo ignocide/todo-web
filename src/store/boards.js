@@ -1,5 +1,6 @@
 import { createBoard, fetchBoardList } from '../api/board';
 import { createAction } from '../utils/action';
+import {FETCH_BOARD_DETAIL} from "./boardDetail";
 
 export const FETCH_BOARDS = createAction('FETCH_BOARDS');
 export const CREATE_BOARD = createAction('CREATE_BOARD');
@@ -35,12 +36,17 @@ const boardStore = {
     },
   },
   actions: {
-    async [FETCH_BOARDS.REQUEST]({ commit }) {
+    async [FETCH_BOARDS.REQUEST]({ commit,dispatch }) {
       commit(FETCH_BOARDS.REQUEST);
       try {
         const result = await fetchBoardList();
         const boardList = result.data;
         commit(FETCH_BOARDS.SUCCESS, boardList);
+
+        if(boardList && boardList.list && boardList.list.length > 0){
+          const boardId = boardList.list[0].id;
+          dispatch(FETCH_BOARD_DETAIL.REQUEST,{boardId})
+        }
       } catch (e) {
         commit(FETCH_BOARDS.FAILURE);
       }

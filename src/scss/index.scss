@@ -4,6 +4,7 @@
 //
 $point-color: #004462;
 $main-color: #71c0b6;
+$active-color: #58b6a9;
 $disabled-color: #c5e7c8;
 $warning-color: #f6f5c3;
 
@@ -35,6 +36,7 @@ $warning-color: #f6f5c3;
     width: 100%;
     font-size: 16px;
     border: 1px solid #ebebeb;
+    transition: border-color 0.3s;
     &:focus {
       outline: 0;
       border-color: $main-color;
@@ -87,11 +89,20 @@ button {
     height: 36px;
     font-size: 14px;
   }
+  &.btn-xs {
+    height: 24px;
+    font-size: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
   &.btn-fill {
     width: 100%;
   }
   &:disabled {
     background-color: rgba(0, 132, 137, 0.3)
+  }
+  &:active{
+    background-color: $active-color;
   }
 }
 

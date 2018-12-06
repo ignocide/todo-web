@@ -14,7 +14,7 @@
 import * as dragNDrop from '../../utils/dragNDrop';
 import Check from '../common/Check.vue';
 import { SET_TASK_DETAIL } from '../../store/taskDetail';
-import { UPDATE_TASK_STEP } from '../../store/taskList';
+import { UPDATE_TASK_STEP } from '../../store/boardDetail';
 
 export default {
   components: {

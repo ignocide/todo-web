@@ -1,10 +1,10 @@
-import { fetchTaskList } from '../api/board';
+import { fetchBoardDetail } from '../api/board';
 import { createTask, updateTaskStep } from '../api/task';
 import { createAction } from '../utils/action';
 import Task, { STEP } from '../vo/Task';
 import { UPDATE_TASK } from './taskDetail';
 
-export const FETCH_TASKS = createAction('FETCH_TASKS');
+export const FETCH_BOARD_DETAIL = createAction('FETCH_BOARD_DETAIL');
 export const CREATE_TASK = createAction('CREATE_TASK');
 export const UPDATE_TASK_STEP = createAction('UPDATE_TASK_STEP');
 
@@ -13,6 +13,7 @@ const boardStore = {
   state: {
     todo: [],
     done: [],
+    board: null,
     donePage: {},
     loading: false,
   },
@@ -22,18 +23,17 @@ const boardStore = {
   //   },
   // },
   mutations: {
-    [FETCH_TASKS.SUCCESS](state, result) {
-      const { todo, done, page } = result;
+    [FETCH_BOARD_DETAIL.SUCCESS](state, result) {
+      const { todo,board } = result;
       state.todo = todo;
-      state.done = done;
-      state.donePage = page;
+      state.board = board;
       state.loading = false;
     },
-    [FETCH_TASKS.FAILURE](state) {
+    [FETCH_BOARD_DETAIL.FAILURE](state) {
       state.list = [];
       state.loading = false;
     },
-    [FETCH_TASKS.REQUEST](state) {
+    [FETCH_BOARD_DETAIL.REQUEST](state) {
       state.loading = true;
     },
     [UPDATE_TASK.SUCCESS](state, updateTask) {
@@ -89,22 +89,20 @@ const boardStore = {
     },
   },
   actions: {
-    async [FETCH_TASKS.REQUEST]({ commit }, params) {
-      commit(FETCH_TASKS.REQUEST);
+    async [FETCH_BOARD_DETAIL.REQUEST]({ commit }, params) {
+      commit(FETCH_BOARD_DETAIL.REQUEST);
       try {
-        const result = await fetchTaskList(params);
+        const result = await fetchBoardDetail(params);
         // const todos = result.data.map(todo => new Task(todo));
 
-        let { todo, done } = result.data;
-        let { content: doneContent, pageable, ...page } = done;
+        let { todo ,board} = result.data;
         todo = todo.map(task => new Task(task));
-        doneContent = doneContent.map(task => new Task(task));
 
-        commit(FETCH_TASKS.SUCCESS, {
-          todo, done: doneContent, page,
+        commit(FETCH_BOARD_DETAIL.SUCCESS, {
+          todo, board
         });
       } catch (e) {
-        commit(FETCH_TASKS.FAILURE);
+        commit(FETCH_BOARD_DETAIL.FAILURE);
       }
     },
     async [UPDATE_TASK_STEP.REQUEST]({ commit }, payload) {

@@ -1,43 +1,118 @@
 <template>
   <div id="board-list-page">
-    <div class="btn-group">
-      <button class="btn-sm" type="button" @click="setCreateBoardModal(true)">생성</button>
+    <aside>
+      <ul id="project-list">
+        <h2 class="project-list-header">프로젝트</h2>
+        <li class="project" v-if="">
+          <form class="board-create-form" @submit="createBoard">
+            <label for="board-name"></label>
+            <input type="text" id="board-name" v-model="createForm.name" required placeholder=""/>
+            <button type="submit" class="submit-btn" v-bind:disabled="disabledCreateButton">
+              +
+            </button>
+          </form>
+        </li>
+        <li class="project" v-for="board in boardList">
+          <div class="project-name">#  {{ board.name }}</div>
+          <button type="button" class="management-btn">
+            ...
+          </button>
+        </li>
+      </ul>
+    </aside>
+    <div id="board-detail">
+      <board-detail />
     </div>
-    <div class="board-list">
-      <div class="cell" v-for="board in boardList">
-        <Board :board="board"/>
-      </div>
-    </div>
-    <modal v-if="showCreatedBoardModal" @close="setCreateBoardModal(false)">
-      <div slot="content">
-        <form @submit="createBoard">
-          <div class="modal-header">
-            <h1>프로젝트 생성</h1>
-          </div>
-          <div class="input-container modal-body">
-            <label for="board-name">프로젝트 명</label>
-            <input type="text" id="board-name" v-model="createForm.name" required/>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" type="submit" v-bind:disabled="disabledCreateButton">확인</button>&nbsp;
-            <button class="btn" type="button" @click="setCreateBoardModal(false)">닫기</button>
-          </div>
-        </form>
-      </div>
-    </modal>
+    <!--<modal v-if="showCreatedBoardModal" @close="setCreateBoardModal(false)">-->
+      <!--<div slot="content">-->
+        <!--<form @submit="createBoard">-->
+          <!--<div class="modal-header">-->
+            <!--<h1>프로젝트 생성</h1>-->
+          <!--</div>-->
+          <!--<div class="input-container modal-body">-->
+            <!--<label for="board-name">프로젝트 명</label>-->
+            <!--<input type="text" id="board-name" v-model="createForm.name" required/>-->
+          <!--</div>-->
+          <!--<div class="modal-footer">-->
+            <!--<button class="btn" type="submit" v-bind:disabled="disabledCreateButton">확인</button>&nbsp;-->
+            <!--<button class="btn" type="button" @click="setCreateBoardModal(false)">닫기</button>-->
+          <!--</div>-->
+        <!--</form>-->
+      <!--</div>-->
+    <!--</modal>-->
   </div>
 </template>
 <style scoped lang="scss">
-  .board-list {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: table;
-    width: 100%;
-    .cell {
-      display: table-cell;
-      width: 33.33333333%;
-      padding: 5px 10px;
-      float: left;
+  $main-color: #71c0b6;
+  #board-list-page{
+    min-height: calc(100vh - 61px);
+    position: relative;
+    padding-left: 300px;
+    display: flex;
+    aside{
+      position: absolute;
+      left: 0;
+      top:0;
+      height:100%;
+      width:300px;
+      padding: 50px 10px;
+      text-align: left;
+      ul#project-list {
+        position: relative;
+        .project{
+          display: flex;
+          padding:10px;
+
+          &-name{
+            flex:1 auto;
+          }
+          & > .management-btn{
+            height:auto;
+            width: 50px;
+            background-color: transparent;
+            border-color: transparent;
+            color: transparent;
+            font-weight:bold;
+            transition: color;
+          }
+
+          &:hover{
+            .management-btn{
+              color: $main-color;
+            }
+          }
+        }
+      }
+    }
+
+
+    form.board-create-form{
+      width:100%;
+      display: flex;
+      input{
+        width:100%;
+        border-width:0 0 1px 0;
+        transition: border-color 0.3s;
+        flex: 1 auto;
+        &:focus{
+          outline: 0;
+          border-color: $main-color;
+        }
+      }
+      & > .submit-btn{
+        height:auto;
+        width: 50px;
+        background-color: transparent;
+        border-color: transparent;
+        color: $main-color;
+        font-weight:bold;
+        &:active{
+          background-color: transparent;
+        }
+        &:disabled{
+          color: #bbb;
+        }
+      }
     }
   }
 
@@ -51,6 +126,7 @@
 import Board from '../../components/Board.vue';
 import { CREATE_BOARD, FETCH_BOARDS } from '../../store/boards.js';
 import Modal from '../../components/common/Modal.vue';
+import BoardDetail from "../../components/board/detail.vue";
 
 const defaultCreateForm = {
   name: '',
@@ -75,6 +151,7 @@ export default {
     };
   },
   components: {
+    BoardDetail,
     Modal,
     Board,
   },
