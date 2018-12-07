@@ -1,14 +1,5 @@
 <template>
-  <div
-    class="task-item"
-    draggable="true"
-    @dragstart="bindData">
-    <check :checked="!isTodo" @click="checkTask"></check>
-    <div @click="setDetail">
-      <h3 class="task-name">{{task.name}}</h3>
-      <p class="task-detail">{{task.detail}}</p>
-    </div>
-  </div>
+  <li class="task"><check @click="checkTask"/>{{task.name}}</li>
 </template>
 <script>
 import * as dragNDrop from '../../utils/dragNDrop';
@@ -53,31 +44,31 @@ export default {
 };
 </script>
 <style lang="scss">
-  .task-item {
-    text-align: left;
-    position: relative;
-    padding: 15px 15px 15px 62px;
-    border: 1px solid #ebebeb;
-    border-radius: 4px;
-    background-color: white;
-    transition: border-color 0.3s;
-    h3.task-name {
-      margin-bottom: 10px;
+  $main-color: #71c0b6;
+  li.task, li.create-task-form{
+    padding: 6px 5px;
+    height: 42px;
+    line-height: 30px;
+    & + li.task {
+      border-top: 1px solid #ebebeb;
     }
-    p.task-detail {
-      size: 14px;
+    & + .create-task-form{
+      border-top: 1px solid #ebebeb;
     }
-    & + .task-item {
-      margin-top: 10px;
+  }
+  li.task{
+
+    .check{
+      margin-right: 10px;
     }
-    .check {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      margin-top: -16px;
-    }
-    &:hover {
-      border-color: #71c0b6;
+    &:hover{
+      cursor: pointer;
+      .check{
+        border-color: $main-color;
+        .check-mark{
+          background-color: $main-color;
+        }
+      }
     }
   }
 </style>

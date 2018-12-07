@@ -34,6 +34,8 @@ const boardStore = {
       state.loading = false;
     },
     [FETCH_BOARD_DETAIL.REQUEST](state) {
+      state.todo = [];
+      state.board = null;
       state.loading = true;
     },
     [UPDATE_TASK.SUCCESS](state, updateTask) {
@@ -82,7 +84,7 @@ const boardStore = {
     },
     [CREATE_TASK.SUCCESS](state, task) {
       state.loading = false;
-      state.todo = [task, ...state.todo];
+      state.todo = [...state.todo,task];
     },
     [CREATE_TASK.REQUEST](state) {
       state.loading = false;

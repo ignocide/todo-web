@@ -3,7 +3,7 @@
     <aside>
       <ul id="project-list">
         <h2 class="project-list-header">프로젝트</h2>
-        <li class="project" v-if="">
+        <li class="project">
           <form class="board-create-form" @submit="createBoard">
             <label for="board-name"></label>
             <input type="text" id="board-name" v-model="createForm.name" required placeholder=""/>
@@ -12,7 +12,7 @@
             </button>
           </form>
         </li>
-        <li class="project" v-for="board in boardList">
+        <li class="project" v-for="board in boardList" @click="selectBoard(board)" :class="getBoardActiveClass(board)">
           <div class="project-name">#  {{ board.name }}</div>
           <button type="button" class="management-btn">
             ...
@@ -62,7 +62,11 @@
         .project{
           display: flex;
           padding:10px;
-
+          transition: color 0.3s;
+          cursor: pointer;
+          &.active{
+            color: $main-color;
+          }
           &-name{
             flex:1 auto;
           }
@@ -125,6 +129,7 @@
 // @ is an alias to /src
 import Board from '../../components/Board.vue';
 import { CREATE_BOARD, FETCH_BOARDS } from '../../store/boards.js';
+import { FETCH_BOARD_DETAIL } from '../../store/boardDetail.js';
 import Modal from '../../components/common/Modal.vue';
 import BoardDetail from "../../components/board/detail.vue";
 
@@ -138,13 +143,16 @@ export default {
     boardList() {
       return this.$store.state.boards.list;
     },
+    selectedBoardId() {
+      const {board }= this.$store.state.boardDetail
+      return board ? board.id : null;
+    },
     disabledCreateButton() {
       return !this.createForm.name;
     },
   },
   data() {
     return {
-      showCreatedBoardModal: false,
       createForm: {
         ...defaultCreateForm,
       },
@@ -161,19 +169,25 @@ export default {
         ...defaultCreateForm,
       };
     },
-    setCreateBoardModal(isShow) {
-      if (!isShow) {
-        this.initCreateForm();
-      }
-      this.showCreatedBoardModal = isShow;
-    },
     async createBoard(e) {
       e.preventDefault();
       e.stopPropagation();
       const { dispatch } = this.$store;
       await dispatch(CREATE_BOARD.REQUEST, this.createForm);
-      this.setCreateBoardModal(false);
     },
+    selectBoard(board){
+        const { dispatch } = this.$store;
+        const {id:boardId }= board;
+        dispatch(FETCH_BOARD_DETAIL.REQUEST,{boardId})
+    },
+    isSelectedBoard(board){
+      return this.selectedBoardId === board.id
+    },
+    getBoardActiveClass(board){
+      return {
+        'active':this.isSelectedBoard(board)
+      }
+    }
   },
   beforeCreate() {
     const { dispatch } = this.$store;

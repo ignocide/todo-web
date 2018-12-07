@@ -42,7 +42,6 @@ const boardStore = {
         const result = await fetchBoardList();
         const boardList = result.data;
         commit(FETCH_BOARDS.SUCCESS, boardList);
-
         if(boardList && boardList.list && boardList.list.length > 0){
           const boardId = boardList.list[0].id;
           dispatch(FETCH_BOARD_DETAIL.REQUEST,{boardId})
