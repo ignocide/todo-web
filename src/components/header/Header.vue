@@ -57,13 +57,15 @@ export default {
 </script>
 
 <style lang="scss">
-  $header-height: 80px;
+  $header-height: 60px;
+  $main-color: #71c0b6;
   header {
     display: table;
     border-bottom: 1px solid #eee;
     width: 100%;
     text-align: left;
     height: $header-height;
+    background-color: $main-color;
     .logo {
       padding-left: 24px;
       padding-right: 24px;

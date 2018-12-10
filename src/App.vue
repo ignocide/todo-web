@@ -4,7 +4,7 @@
     <div id="main">
       <router-view/>
     </div>
-    <portal-target name="modal"/>
+    <modals-container/>
   </div>
 </template>
 

@@ -47,8 +47,8 @@
 
 </style>
 <script>
-import * as taskList from '../../store/taskList.js';
-import TodoTrack from '../../components/task/track.vue';
+import * as taskList from '../../store/boardDetail.js';
+import TodoTrack from '../../components/board/detail.vue';
 import { STEP } from '../../vo/Task.js';
 import Modal from '../../components/common/Modal.vue';
 import Task from '../../vo/Task';
@@ -66,13 +66,13 @@ export default {
       return [];
     },
     todos() {
-      return this.$store.state.taskList.todo;
+      return this.$store.state.boardDetail.todo;
     },
     //    doings() {
-    //      return this.taskList.filter(todo => todo.step === STEP.DOING);
+    //      return this.boardDetail.filter(todo => todo.step === STEP.DOING);
     //    },
     dones() {
-      return this.$store.state.taskList.done;
+      return this.$store.state.boardDetail.done;
     },
     STEP() {
       return STEP;
@@ -100,7 +100,7 @@ export default {
   beforeCreate() {
     const { boardId } = this.$route.params;
     const { dispatch } = this.$store;
-    dispatch(taskList.FETCH_TASKS.REQUEST, { boardId });
+    dispatch(taskList.FETCH_BOARD_DETAIL.REQUEST, { boardId });
   },
   methods: {
     initCreateForm() {
