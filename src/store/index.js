@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import auth from './auth';
 import boards from './boards';
+import boardDetailUpdate from './boardDetailUpdate';
 import boardDetail from './boardDetail';
 import taskDetail from './taskDetail';
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     auth,
     boards,
     boardDetail,
+    boardDetailUpdate,
     taskDetail,
   },
 });

@@ -12,11 +12,20 @@
             </button>
           </form>
         </li>
-        <li class="project" v-for="board in boardList" @click="selectBoard(board)" :class="getBoardActiveClass(board)">
-          <div class="project-name">#  {{ board.name }}</div>
-          <button type="button" class="management-btn">
-            ...
-          </button>
+        <li v-for="board in boardList">
+          <div  class="project"  :class="getBoardActiveClass(board)">
+            <div class="project-name" @click="selectBoard(board)">#  {{ board.name }}</div>
+            <button type="button" class="management-btn" @click="toggleProjectOptRow(board)">
+              ...
+            </button>
+          </div>
+          <transition name="fade">
+            <div v-if="board.id === activeOptRowBoardId" class="project-opt-row">
+              <button type="button" class="management-btn" @click="requestProjectDetailModal(board)">
+                수정
+              </button>
+            </div>
+          </transition>
         </li>
       </ul>
     </aside>
@@ -86,6 +95,17 @@
             }
           }
         }
+        .project-opt-row{
+          & > .management-btn{
+            height:auto;
+            width: auto;
+            background-color: transparent;
+            border-color: transparent;
+            color: black;
+            font-weight:bold;
+            transition: color;
+          }
+        }
       }
     }
 
@@ -124,14 +144,21 @@
     text-align: right;
     padding: 20px;
   }
+  .fade-enter-active, .fade-leave-active {
+    /*transform : scaleY(1);*/
+    /*transition: transform .5s;*/
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    /*transform : scaleY(0);*/
+  }
 </style>
 <script>
 // @ is an alias to /src
 import Board from '../../components/Board.vue';
 import { CREATE_BOARD, FETCH_BOARDS } from '../../store/boards.js';
 import { FETCH_BOARD_DETAIL } from '../../store/boardDetail.js';
-import Modal from '../../components/common/Modal.vue';
-import BoardDetail from "../../components/board/detail.vue";
+import BoardDetail from '../../components/board/detail.vue';
+import UpdateBoardModal from '../../components/board/updateModal.vue';
 
 const defaultCreateForm = {
   name: '',
@@ -144,7 +171,7 @@ export default {
       return this.$store.state.boards.list;
     },
     selectedBoardId() {
-      const {board }= this.$store.state.boardDetail
+      const { board } = this.$store.state.boardDetail;
       return board ? board.id : null;
     },
     disabledCreateButton() {
@@ -156,11 +183,11 @@ export default {
       createForm: {
         ...defaultCreateForm,
       },
+      activeOptRowBoardId: null,
     };
   },
   components: {
     BoardDetail,
-    Modal,
     Board,
   },
   methods: {
@@ -175,19 +202,34 @@ export default {
       const { dispatch } = this.$store;
       await dispatch(CREATE_BOARD.REQUEST, this.createForm);
     },
-    selectBoard(board){
-        const { dispatch } = this.$store;
-        const {id:boardId }= board;
-        dispatch(FETCH_BOARD_DETAIL.REQUEST,{boardId})
+    selectBoard(board) {
+      const { dispatch } = this.$store;
+      const { id: boardId } = board;
+      dispatch(FETCH_BOARD_DETAIL.REQUEST, { boardId });
     },
-    isSelectedBoard(board){
-      return this.selectedBoardId === board.id
+    isSelectedBoard(board) {
+      return this.selectedBoardId === board.id;
     },
-    getBoardActiveClass(board){
+    getBoardActiveClass(board) {
       return {
-        'active':this.isSelectedBoard(board)
+        active: this.isSelectedBoard(board),
+      };
+    },
+    toggleProjectOptRow(board) {
+      const { id } = board;
+      if (this.activeOptRowBoardId === id) {
+        this.activeOptRowBoardId = null;
+      } else {
+        this.activeOptRowBoardId = id;
       }
-    }
+    },
+    requestProjectDetailModal(board) {
+      this.$modal.show(UpdateBoardModal, {
+        board,
+      }, {
+        height: 'auto',
+      });
+    },
   },
   beforeCreate() {
     const { dispatch } = this.$store;

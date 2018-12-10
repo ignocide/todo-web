@@ -24,7 +24,7 @@ const boardStore = {
   // },
   mutations: {
     [FETCH_BOARD_DETAIL.SUCCESS](state, result) {
-      const { todo,board } = result;
+      const { todo, board } = result;
       state.todo = todo;
       state.board = board;
       state.loading = false;
@@ -84,7 +84,7 @@ const boardStore = {
     },
     [CREATE_TASK.SUCCESS](state, task) {
       state.loading = false;
-      state.todo = [...state.todo,task];
+      state.todo = [...state.todo, task];
     },
     [CREATE_TASK.REQUEST](state) {
       state.loading = false;
@@ -97,11 +97,11 @@ const boardStore = {
         const result = await fetchBoardDetail(params);
         // const todos = result.data.map(todo => new Task(todo));
 
-        let { todo ,board} = result.data;
+        let { todo, board } = result.data;
         todo = todo.map(task => new Task(task));
 
         commit(FETCH_BOARD_DETAIL.SUCCESS, {
-          todo, board
+          todo, board,
         });
       } catch (e) {
         commit(FETCH_BOARD_DETAIL.FAILURE);

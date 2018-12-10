@@ -1,6 +1,7 @@
 import { createBoard, fetchBoardList } from '../api/board';
 import { createAction } from '../utils/action';
-import {FETCH_BOARD_DETAIL} from "./boardDetail";
+import { FETCH_BOARD_DETAIL } from './boardDetail';
+import {UPDATE_BOARD} from "./boardDetailUpdate";
 
 export const FETCH_BOARDS = createAction('FETCH_BOARDS');
 export const CREATE_BOARD = createAction('CREATE_BOARD');
@@ -34,17 +35,26 @@ const boardStore = {
     [CREATE_BOARD.FAILURE](state) {
       state.loading = false;
     },
+    [UPDATE_BOARD.SUCCESS](state,updatedBoard){
+      state.list = state.list.map(board => {
+        if(updatedBoard.id === board.id){
+          return updatedBoard
+        } else {
+          return board
+        }
+      })
+    },
   },
   actions: {
-    async [FETCH_BOARDS.REQUEST]({ commit,dispatch }) {
+    async [FETCH_BOARDS.REQUEST]({ commit, dispatch }) {
       commit(FETCH_BOARDS.REQUEST);
       try {
         const result = await fetchBoardList();
         const boardList = result.data;
         commit(FETCH_BOARDS.SUCCESS, boardList);
-        if(boardList && boardList.list && boardList.list.length > 0){
+        if (boardList && boardList.list && boardList.list.length > 0) {
           const boardId = boardList.list[0].id;
-          dispatch(FETCH_BOARD_DETAIL.REQUEST,{boardId})
+          dispatch(FETCH_BOARD_DETAIL.REQUEST, { boardId });
         }
       } catch (e) {
         commit(FETCH_BOARDS.FAILURE);

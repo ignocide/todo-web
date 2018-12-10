@@ -81,10 +81,10 @@
 <script>
 import TaskComponent from '../task/item.vue';
 import Task from '../../vo/Task';
-import TaskItem from '../task/item.vue'
+import TaskItem from '../task/item.vue';
 import * as dragNDrop from '../../utils/dragNDrop';
 import { CREATE_TASK } from '../../store/boardDetail';
-import Check from "../common/Check.vue";
+import Check from '../common/Check.vue';
 
 const defaultCreateForm = {
   name: '',
@@ -109,7 +109,7 @@ export default {
   },
   components: {
     TaskItem,
-    Check
+    Check,
   },
   created() {
   },
@@ -130,7 +130,7 @@ export default {
       e.stopPropagation();
       const { dispatch } = this.$store;
       const { id: boardId } = this.boardDetail;
-      console.log(boardId)
+      console.log(boardId);
       const newTask = new Task(this.createForm);
       newTask.boardId = boardId;
       await dispatch(CREATE_TASK.REQUEST, { task: newTask });
