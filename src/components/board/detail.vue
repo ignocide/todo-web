@@ -130,7 +130,6 @@ export default {
       e.stopPropagation();
       const { dispatch } = this.$store;
       const { id: boardId } = this.boardDetail;
-      console.log(boardId);
       const newTask = new Task(this.createForm);
       newTask.boardId = boardId;
       await dispatch(CREATE_TASK.REQUEST, { task: newTask });
