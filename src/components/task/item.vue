@@ -1,11 +1,11 @@
 <template>
-  <li class="task"><check @click="checkTask"/>{{task.name}}</li>
+  <li class="task"><check @click="checkTask"/><span @click="requestTaskDetailModal">{{task.name}}</span></li>
 </template>
 <script>
-import * as dragNDrop from '../../utils/dragNDrop';
 import Check from '../common/Check.vue';
 import { SET_TASK_DETAIL } from '../../store/taskDetail';
 import { UPDATE_TASK_STEP } from '../../store/boardDetail';
+import TaskDetailModal from './updateModal.vue';
 
 export default {
   components: {
@@ -26,9 +26,12 @@ export default {
     },
   },
   methods: {
-    bindData(event) {
-      dragNDrop.setData(event, this.task);
-      dragNDrop.setType(event, 'task');
+    requestTaskDetailModal() {
+      this.$modal.show(TaskDetailModal, {
+        task: this.task,
+      }, {
+        height: 'auto',
+      });
     },
     checkTask(evt) {
       const { dispatch } = this.$store;

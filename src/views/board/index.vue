@@ -24,6 +24,9 @@
               <button type="button" class="management-btn" @click="requestProjectDetailModal(board)">
                 수정
               </button>
+              <button type="button" class="management-btn" @click="requestBoardDelete(board)">
+                삭제
+              </button>
             </div>
           </transition>
         </li>
@@ -155,7 +158,7 @@
 <script>
 // @ is an alias to /src
 import Board from '../../components/Board.vue';
-import { CREATE_BOARD, FETCH_BOARDS } from '../../store/boards.js';
+import { CREATE_BOARD, FETCH_BOARDS, DELETE_BOARD } from '../../store/boards.js';
 import { FETCH_BOARD_DETAIL } from '../../store/boardDetail.js';
 import BoardDetail from '../../components/board/detail.vue';
 import UpdateBoardModal from '../../components/board/updateModal.vue';
@@ -230,6 +233,24 @@ export default {
         height: 'auto',
       });
     },
+    requestBoardDelete(board){
+      this.$modal.show('dialog', {
+        title: board.name,
+        text: '이 프로젝트를 삭제합니까?',
+        buttons: [
+          {
+            title: '확인',
+            handler: () => {
+              const { dispatch } = this.$store;
+              dispatch(DELETE_BOARD.REQUEST,{boardId: board.id});
+            }
+          },
+          {
+            title: '취소'
+          }
+        ]
+      })
+    }
   },
   beforeCreate() {
     const { dispatch } = this.$store;

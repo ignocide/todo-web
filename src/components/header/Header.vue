@@ -1,27 +1,28 @@
 <template>
   <header role="banner">
-    <div class="logo">
-      <div class="service-name">
-        Todo
+    <div class="header-container">
+      <div class="logo">
+        <div class="service-name">
+          Todo
+        </div>
+      </div>
+      <div class="header-space"/>
+      <div id="nav">
+        <nav>
+          <ul class="nav-link-list">
+            <li class="nav-link-item">
+              <router-link class="router-link" to="/board">Board</router-link>
+            </li>
+            <li class="nav-link-item">
+              <button class="router-link user-profile-button" v-on:click="toggleUserProfileRoute" v-if="authorization">
+                <img alt="user_profile" src="../../assets/user.webp"/>
+                <UserProfileRoute v-if="showUserProfile"/>
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
-    <div class="header-space"/>
-    <div id="nav">
-      <nav>
-        <ul class="nav-link-list">
-          <li class="nav-link-item">
-            <router-link class="router-link" to="/board">Board</router-link>
-          </li>
-          <li class="nav-link-item">
-            <button class="router-link user-profile-button" v-on:click="toggleUserProfileRoute" v-if="authorization">
-              <img alt="user_profile" src="../../assets/user.webp"/>
-              <UserProfileRoute v-if="showUserProfile"/>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
   </header>
 </template>
 <script>
@@ -60,12 +61,17 @@ export default {
   $header-height: 60px;
   $main-color: #71c0b6;
   header {
-    display: table;
     border-bottom: 1px solid #eee;
     width: 100%;
     text-align: left;
     height: $header-height;
     background-color: $main-color;
+    .header-container{
+      display: table;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
     .logo {
       padding-left: 24px;
       padding-right: 24px;

@@ -7,4 +7,6 @@ export const fetchBoardDetail = (params = {}, data) => api.get(urlBuilder('/todo
 
 export const updateBoard = (params = {}, data) => api.put(urlBuilder('/todo/board/:boardId', params), data);
 
+export const deleteBoard = (params = {}) => api.delete(urlBuilder('/todo/board/:boardId', params));
+
 export const createBoard = form => api.post(urlBuilder('/todo/board'), form);

@@ -4,6 +4,7 @@
     <div id="main">
       <router-view/>
     </div>
+    <v-dialog/>
     <modals-container/>
   </div>
 </template>

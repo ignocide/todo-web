@@ -33,6 +33,7 @@ export default {
     width: 200px;
     border: 1px solid #ebebeb;
     text-align: left;
+    z-index:1;
     background-color: white;
     li {
       padding-left: 20px;
