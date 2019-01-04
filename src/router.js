@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
 import { getUserRoles } from './utils/userCookie';
 
 Vue.use(Router);
