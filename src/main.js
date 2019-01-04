@@ -9,7 +9,7 @@ import './registerServiceWorker';
 Vue.config.productionTip = false;
 
 // Vue.use(VModal, { dynamic: true, injectModalsContainer: true })
-Vue.use(VModal, {dynamic: true, dialog: true});
+Vue.use(VModal, { dynamic: true, dialog: true });
 
 new Vue({
   router,

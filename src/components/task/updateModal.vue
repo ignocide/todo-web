@@ -3,11 +3,11 @@
     <form @submit="updateTask">
       <div class="input-container">
         <label for="task-name"></label>
-        <input type="text" id="task-name" class="update" v-model="taskForm.name"/>
+        <input type="text" id="task-name" class="update" v-model="taskForm.name" />
       </div>
       <div class="input-container">
         <label for="task-detail">상세 내용</label>
-        <textarea type="text" id="task-detail" class="update" v-model="taskForm.detail"/>
+        <textarea type="text" id="task-detail" class="update" v-model="taskForm.detail" />
       </div>
       <div class="button-row">
         <button type="submit">수정</button>
@@ -59,8 +59,8 @@
     },
     components: {},
     created() {
-      console.log(this.task)
-      this.taskForm = new Task(this.task)
+      console.log(this.task);
+      this.taskForm = new Task(this.task);
     },
     methods: {
       async updateTask(evt) {

@@ -1,5 +1,5 @@
-import {updateBoard} from '../api/board';
-import {createAction} from '../utils/action';
+import { updateBoard } from '../api/board';
+import { createAction } from '../utils/action';
 
 export const UPDATE_BOARD = createAction('UPDATE_BOARD');
 
@@ -20,13 +20,13 @@ const boardStore = {
     },
   },
   actions: {
-    async [UPDATE_BOARD.REQUEST]({commit}, params) {
+    async [UPDATE_BOARD.REQUEST]({ commit }, params) {
       commit(UPDATE_BOARD.REQUEST);
       try {
-        const {board, boardId} = params
-        const result = await updateBoard({boardId}, board);
+        const { board, boardId } = params;
+        const result = await updateBoard({ boardId }, board);
 
-        let {board: updatedBoard} = result.data;
+        let { board: updatedBoard } = result.data;
 
         commit(UPDATE_BOARD.SUCCESS, updatedBoard);
       } catch (e) {

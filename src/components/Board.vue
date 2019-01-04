@@ -34,15 +34,15 @@
   }
 </style>
 <script>
-export default {
-  name: 'board',
-  props: ['board'],
-  computed: {
-    boardDetailLink() {
-      return `/board/${this.board.id}`;
+  export default {
+    name: 'board',
+    props: ['board'],
+    computed: {
+      boardDetailLink() {
+        return `/board/${this.board.id}`;
+      },
     },
-  },
-  created() {
-  },
-};
+    created() {
+    },
+  };
 </script>

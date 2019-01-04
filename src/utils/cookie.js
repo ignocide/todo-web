@@ -5,7 +5,7 @@ class Cookie {
   keys = {
     ACCESS_TOKEN: 'at',
     REFRESH_TOKEN: 'rt',
-  }
+  };
 
   getTokens() {
     const refreshToken = cookie.get(this.keys.REFRESH_TOKEN);

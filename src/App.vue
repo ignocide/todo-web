@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header />
     <div id="main">
-      <router-view/>
+      <router-view />
     </div>
-    <v-dialog/>
-    <modals-container/>
+    <v-dialog />
+    <modals-container />
   </div>
 </template>
 
@@ -28,24 +28,24 @@
 
 </style>
 <script>
-import Header from './components/header/Header.vue';
-// import PortalTarget from "portal-vue/src/components/portal-target";
+  import Header from './components/header/Header.vue';
+  // import PortalTarget from "portal-vue/src/components/portal-target";
 
-export default {
-  name: 'App',
-  props: {
-    msg: String,
-  },
-  beforeCreate() {
-    this.$store.commit('AUTH_INIT');
-    this.$store.dispatch('REFRESH_TOKEN');
-  },
-  created() {
-    //    console.log(this.$store.state.auth.user);
-  },
-  components: {
-    //    PortalTarget,
-    Header,
-  },
-};
+  export default {
+    name: 'App',
+    props: {
+      msg: String,
+    },
+    beforeCreate() {
+      this.$store.commit('AUTH_INIT');
+      this.$store.dispatch('REFRESH_TOKEN');
+    },
+    created() {
+      //    console.log(this.$store.state.auth.user);
+    },
+    components: {
+      //    PortalTarget,
+      Header,
+    },
+  };
 </script>

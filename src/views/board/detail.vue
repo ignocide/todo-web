@@ -16,7 +16,7 @@
           <div class="modal-body">
             <div class="input-container">
               <label for="task-name">Task</label>
-              <input type="text" id="task-name" v-model="createForm.name" required/>
+              <input type="text" id="task-name" v-model="createForm.name" required />
             </div>
             <div class="input-container">
               <label for="task-detail">상세 설명</label>
@@ -32,7 +32,7 @@
       </div>
     </modal>
     <modal v-if="showDetailForm">
-      <task-detail-form slot="content"/>
+      <task-detail-form slot="content" />
     </modal>
   </div>
 </template>
@@ -47,85 +47,85 @@
 
 </style>
 <script>
-import * as taskList from '../../store/boardDetail.js';
-import TodoTrack from '../../components/board/detail.vue';
-import { STEP } from '../../vo/Task.js';
-import Modal from '../../components/common/Modal.vue';
-import Task from '../../vo/Task';
-import TaskDetailForm from '../../components/task/detailForm.vue';
+  import * as taskList from '../../store/boardDetail.js';
+  import TodoTrack from '../../components/board/detail.vue';
+  import { STEP } from '../../vo/Task.js';
+  import Modal from '../../components/common/Modal.vue';
+  import Task from '../../vo/Task';
+  import TaskDetailForm from '../../components/task/detailForm.vue';
 
-const defaultCreateForm = {
-  name: '',
-  detail: '',
-};
+  const defaultCreateForm = {
+    name: '',
+    detail: '',
+  };
 
-export default {
-  name: 'taskList',
-  computed: {
-    taskList() {
-      return [];
-    },
-    todos() {
-      return this.$store.state.boardDetail.todo;
-    },
-    //    doings() {
-    //      return this.boardDetail.filter(todo => todo.step === STEP.DOING);
-    //    },
-    dones() {
-      return this.$store.state.boardDetail.done;
-    },
-    STEP() {
-      return STEP;
-    },
-    disabledCreateButton() {
-      return !this.createForm.name;
-    },
-    showDetailForm() {
-      return !!this.$store.state.taskDetail.detail;
-    },
-  },
-  data() {
-    return {
-      showCreatedBoardModal: false,
-      createForm: {
-        ...defaultCreateForm,
+  export default {
+    name: 'taskList',
+    computed: {
+      taskList() {
+        return [];
       },
-    };
-  },
-  components: {
-    TaskDetailForm,
-    Modal,
-    TodoTrack,
-  },
-  beforeCreate() {
-    const { boardId } = this.$route.params;
-    const { dispatch } = this.$store;
-    dispatch(taskList.FETCH_BOARD_DETAIL.REQUEST, { boardId });
-  },
-  methods: {
-    initCreateForm() {
-      this.createForm = {
-        ...defaultCreateForm,
+      todos() {
+        return this.$store.state.boardDetail.todo;
+      },
+      //    doings() {
+      //      return this.boardDetail.filter(todo => todo.step === STEP.DOING);
+      //    },
+      dones() {
+        return this.$store.state.boardDetail.done;
+      },
+      STEP() {
+        return STEP;
+      },
+      disabledCreateButton() {
+        return !this.createForm.name;
+      },
+      showDetailForm() {
+        return !!this.$store.state.taskDetail.detail;
+      },
+    },
+    data() {
+      return {
+        showCreatedBoardModal: false,
+        createForm: {
+          ...defaultCreateForm,
+        },
       };
     },
-    setCreateTaskModal(isShow) {
-      if (!isShow) {
-        this.initCreateForm();
-      }
-      this.showCreatedBoardModal = isShow;
+    components: {
+      TaskDetailForm,
+      Modal,
+      TodoTrack,
     },
-    async createTask(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      const { dispatch } = this.$store;
+    beforeCreate() {
       const { boardId } = this.$route.params;
-      const newTask = new Task(this.createForm);
-      newTask.boardId = boardId;
-      await dispatch(taskList.CREATE_TASK.REQUEST, { task: newTask });
-      this.setCreateTaskModal(false);
+      const { dispatch } = this.$store;
+      dispatch(taskList.FETCH_BOARD_DETAIL.REQUEST, { boardId });
     },
-  },
-  created() {
-  },
-};
+    methods: {
+      initCreateForm() {
+        this.createForm = {
+          ...defaultCreateForm,
+        };
+      },
+      setCreateTaskModal(isShow) {
+        if (!isShow) {
+          this.initCreateForm();
+        }
+        this.showCreatedBoardModal = isShow;
+      },
+      async createTask(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const { dispatch } = this.$store;
+        const { boardId } = this.$route.params;
+        const newTask = new Task(this.createForm);
+        newTask.boardId = boardId;
+        await dispatch(taskList.CREATE_TASK.REQUEST, { task: newTask });
+        this.setCreateTaskModal(false);
+      },
+    },
+    created() {
+    },
+  };
 </script>

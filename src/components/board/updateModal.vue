@@ -3,7 +3,7 @@
     <form @submit="updateBoard">
       <div class="input-container">
         <label for="board-name"></label>
-        <input type="text" id="board-name" class="update" v-model="boardForm.name"/>
+        <input type="text" id="board-name" class="update" v-model="boardForm.name" />
       </div>
       <div class="button-row">
         <button type="submit">수정</button>
@@ -28,7 +28,7 @@
   }
 </style>
 <script>
-  import {UPDATE_BOARD} from '../../store/boardDetailUpdate';
+  import { UPDATE_BOARD } from '../../store/boardDetailUpdate';
 
   const defaultUpdateForm = {
     name: '',
@@ -48,20 +48,20 @@
     },
     components: {},
     created() {
-      this.boardForm.name = this.board.name
+      this.boardForm.name = this.board.name;
     },
     methods: {
       async updateBoard(e) {
         e.preventDefault();
         e.stopPropagation();
-        const {dispatch} = this.$store;
+        const { dispatch } = this.$store;
 
         await dispatch(UPDATE_BOARD.REQUEST, {
           board: this.boardForm,
-          boardId: this.board.id
+          boardId: this.board.id,
         });
 
-        this.$emit('close')
+        this.$emit('close');
       },
     },
   };

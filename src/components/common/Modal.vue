@@ -4,33 +4,33 @@
       <div class="modal-wrapper">
         <div class="modal-container" v-bind:class="containerClass" @click="cancelBubbling"
              v-bind:style="{ maxWidth: maxWidth+'px'}">
-          <slot name="content"/>
+          <slot name="content" />
         </div>
       </div>
     </div>
   </portal>
 </template>
 <script>
-export default {
-  name: 'Modal',
-  props: {
-    containerClass: String,
-    maxWidth: {
-      type: Number,
-      default: 500,
+  export default {
+    name: 'Modal',
+    props: {
+      containerClass: String,
+      maxWidth: {
+        type: Number,
+        default: 500,
+      },
     },
-  },
-  methods: {
-    cancelBubbling(e) {
-      e.stopPropagation();
+    methods: {
+      cancelBubbling(e) {
+        e.stopPropagation();
+      },
     },
-  },
-  beforeCreate() {
-  },
-  created() {
-  },
-  components: {},
-};
+    beforeCreate() {
+    },
+    created() {
+    },
+    components: {},
+  };
 </script>
 
 <style lang="scss">

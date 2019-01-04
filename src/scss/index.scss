@@ -9,167 +9,166 @@ $disabled-color: #c5e7c8;
 $warning-color: #f6f5c3;
 
 * {
-  &:before {
+    &:before {
+        box-sizing: border-box;
+    }
+    &:after {
+        box-sizing: border-box;
+    }
     box-sizing: border-box;
-  }
-  &:after {
-    box-sizing: border-box;
-  }
-  box-sizing: border-box;
 }
 
 .input-container {
-  margin-bottom: 20px;
-  text-align: left;
-  label {
-    margin-bottom: 8px;
-    font-size: 12px;
-    font-weight: 900;
-    display: block;
-  }
+    margin-bottom: 20px;
+    text-align: left;
+    label {
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 900;
+        display: block;
+    }
 
-  input {
-    padding: 11px;
-    height: 44px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 100%;
-    font-size: 16px;
-    border: 1px solid #ebebeb;
-    transition: border-color 0.3s;
-    &:focus {
-      outline: 0;
-      border-color: $main-color;
+    input {
+        padding: 11px;
+        height: 44px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 16px;
+        border: 1px solid #ebebeb;
+        transition: border-color 0.3s;
+        &:focus {
+            outline: 0;
+            border-color: $main-color;
+        }
+        &.update {
+            border-color: transparent;
+            &:focus {
+                outline: 0;
+                border-color: $main-color;
+            }
+        }
     }
-    &.update{
-      border-color: transparent;
-      &:focus {
-        outline: 0;
-        border-color: $main-color;
-      }
-    }
-  }
 
-  textarea {
-    padding: 11px;
-    height: 92px;
-    box-sizing: border-box;
-    border-radius: 4px;
-    width: 100%;
-    font-size: 16px;
-    border: 1px solid #ebebeb;
-    &:focus {
-      outline: 0;
-      border-color: $main-color;
+    textarea {
+        padding: 11px;
+        height: 92px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 100%;
+        font-size: 16px;
+        border: 1px solid #ebebeb;
+        &:focus {
+            outline: 0;
+            border-color: $main-color;
+        }
     }
-  }
 }
 
 .input-container {
-  button {
+    button {
+        height: 44px;
+        background-color: $main-color;
+        border: 1px solid $main-color;
+        color: white;
+        border-radius: 4px;
+        font-size: 16px;
+        &:focus {
+            outline: 0;
+        }
+
+    }
+}
+
+button {
     height: 44px;
     background-color: $main-color;
     border: 1px solid $main-color;
     color: white;
     border-radius: 4px;
     font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
     &:focus {
-      outline: 0;
+        outline: 0;
     }
-
-  }
-}
-
-button {
-  height: 44px;
-  background-color: $main-color;
-  border: 1px solid $main-color;
-  color: white;
-  border-radius: 4px;
-  font-size: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
-  &:focus {
-    outline: 0;
-  }
-  &.btn-sm {
-    height: 36px;
-    font-size: 14px;
-  }
-  &.btn-xs {
-    height: 24px;
-    font-size: 12px;
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  &.btn-fill {
-    width: 100%;
-  }
-  &:disabled {
-    background-color: rgba(0, 132, 137, 0.3)
-  }
-  &:active{
-    background-color: $active-color;
-  }
+    &.btn-sm {
+        height: 36px;
+        font-size: 14px;
+    }
+    &.btn-xs {
+        height: 24px;
+        font-size: 12px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    &.btn-fill {
+        width: 100%;
+    }
+    &:disabled {
+        background-color: rgba(0, 132, 137, 0.3)
+    }
+    &:active {
+        background-color: $active-color;
+    }
 }
 
 ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .row {
-  &:after {
-    content: " ";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
 }
 
 h1, h2, h3, h4, h5, p {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 a {
-  color: #484848;
-  text-decoration: none;
-  &:visited {
+    color: #484848;
     text-decoration: none;
-  }
+    &:visited {
+        text-decoration: none;
+    }
 }
 
 .fade-in-enter {
-  opacity: 0;
+    opacity: 0;
 }
 
 .fade-in-leave-active {
-  opacity: 0;
+    opacity: 0;
 }
 
 .fade-in-enter .fade-in-container,
 .fade-in-leave-active .fade-in-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
-
-.modal{
-  width:100%;
-  max-width:700px;
-  padding: 20px;
+.modal {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
 }
 
 .vue-dialog .dialog-content {
-  padding: 20px;
-  font-size: 16px;
+    padding: 20px;
+    font-size: 16px;
 }
 
-.vue-dialog-button{
-  font-size: 14px !important;
+.vue-dialog-button {
+    font-size: 14px !important;
 }

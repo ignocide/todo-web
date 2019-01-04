@@ -1,26 +1,26 @@
 <template>
   <div class="check" @click="$emit('click')" @class="">
-      <!--<svg viewBox="0 0 52 52" fill="currentColor" fill-opacity="0" stroke="currentColor" stroke-width="3"-->
-           <!--focusable="false" aria-hidden="true" role="presentation" stroke-linecap="round" stroke-linejoin="round"-->
-           <!--style="height: 16px; width: 16px; display: block; overflow: visible;">-->
-        <!--<path d="m19.1 25.2 4.7 6.2 12.1-11.2"></path>-->
-      <!--</svg>-->
+    <!--<svg viewBox="0 0 52 52" fill="currentColor" fill-opacity="0" stroke="currentColor" stroke-width="3"-->
+    <!--focusable="false" aria-hidden="true" role="presentation" stroke-linecap="round" stroke-linejoin="round"-->
+    <!--style="height: 16px; width: 16px; display: block; overflow: visible;">-->
+    <!--<path d="m19.1 25.2 4.7 6.2 12.1-11.2"></path>-->
+    <!--</svg>-->
     <div class="check-mark">
 
     </div>
   </div>
 </template>
 <script>
-export default {
-  components: {},
-  name: 'check',
-  props: {
-    checked: Boolean,
-  },
-  methods: {},
-  created() {
-  },
-};
+  export default {
+    components: {},
+    name: 'check',
+    props: {
+      checked: Boolean,
+    },
+    methods: {},
+    created() {
+    },
+  };
 </script>
 <style scoped lang="scss">
   $active-color: #71c8b6;
@@ -36,20 +36,20 @@ export default {
     margin: 0 5px;
     position: relative;
     transition: border-color 0.3s;
-    .check-mark{
+    .check-mark {
       position: absolute;
       display: inline-block;
-      width:50%;
-      height:50%;
+      width: 50%;
+      height: 50%;
       background-color: transparent;
       transition: background-color 0.3s;
       border-radius: 50%;
       top: 25%;
       left: 25%;
     }
-    &:hover{
+    &:hover {
       border-color: $active-color;
-      .check-mark{
+      .check-mark {
         background-color: $active-color;
       }
     }

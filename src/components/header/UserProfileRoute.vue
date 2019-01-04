@@ -11,18 +11,18 @@
   </div>
 </template>
 <script>
-export default {
-  name: 'UseProfileRoute',
-  methods: {
-    logout(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      this.$store.commit('LOGOUT');
+  export default {
+    name: 'UseProfileRoute',
+    methods: {
+      logout(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.$store.commit('LOGOUT');
 
-      this.$router.replace('/login');
+        this.$router.replace('/login');
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="scss">
@@ -33,7 +33,7 @@ export default {
     width: 200px;
     border: 1px solid #ebebeb;
     text-align: left;
-    z-index:1;
+    z-index: 1;
     background-color: white;
     li {
       padding-left: 20px;

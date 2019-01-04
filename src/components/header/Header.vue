@@ -2,11 +2,9 @@
   <header role="banner">
     <div class="header-container">
       <div class="logo">
-        <div class="service-name">
-          Todo
-        </div>
+        <div class="service-name">TODO</div>
       </div>
-      <div class="header-space"/>
+      <div class="header-space" />
       <div id="nav">
         <nav>
           <ul class="nav-link-list">
@@ -15,8 +13,8 @@
             </li>
             <li class="nav-link-item">
               <button class="router-link user-profile-button" v-on:click="toggleUserProfileRoute" v-if="authorization">
-                <img alt="user_profile" src="../../assets/user.webp"/>
-                <UserProfileRoute v-if="showUserProfile"/>
+                <img alt="user_profile" src="../../assets/user.webp" />
+                <UserProfileRoute v-if="showUserProfile" />
               </button>
             </li>
           </ul>
@@ -26,35 +24,35 @@
   </header>
 </template>
 <script>
-import { hasRole } from '../../utils/userCookie';
-import UserProfileRoute from './UserProfileRoute.vue';
+  import { hasRole } from '../../utils/userCookie';
+  import UserProfileRoute from './UserProfileRoute.vue';
 
-export default {
-  name: 'Header',
-  data() {
-    return {
-      showUserProfile: false,
-    };
-  },
-  computed: {
-    user: () => this.$store.state.auth.user,
-    authorization() {
-      return this.$store.state.auth.user;
+  export default {
+    name: 'Header',
+    data() {
+      return {
+        showUserProfile: false,
+      };
     },
-  },
-  methods: {
-    toggleUserProfileRoute() {
-      this.showUserProfile = !this.showUserProfile;
+    computed: {
+      user: () => this.$store.state.auth.user,
+      authorization() {
+        return this.$store.state.auth.user;
+      },
     },
-  },
-  beforeCreate() {
-  },
-  created() {
-  },
-  components: {
-    UserProfileRoute,
-  },
-};
+    methods: {
+      toggleUserProfileRoute() {
+        this.showUserProfile = !this.showUserProfile;
+      },
+    },
+    beforeCreate() {
+    },
+    created() {
+    },
+    components: {
+      UserProfileRoute,
+    },
+  };
 </script>
 
 <style lang="scss">
@@ -66,7 +64,7 @@ export default {
     text-align: left;
     height: $header-height;
     background-color: $main-color;
-    .header-container{
+    .header-container {
       display: table;
       max-width: 1200px;
       margin-left: auto;
@@ -86,6 +84,9 @@ export default {
         height: 32px;
         line-height: 32px;
         display: inline-block;
+        color: white;
+        font-size: 24px;
+        letter-spacing: 5px;
       }
     }
 

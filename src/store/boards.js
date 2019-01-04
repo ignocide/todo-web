@@ -1,7 +1,7 @@
-import {createBoard, deleteBoard, fetchBoardList} from '../api/board';
-import {createAction} from '../utils/action';
-import {FETCH_BOARD_DETAIL} from './boardDetail';
-import {UPDATE_BOARD} from "./boardDetailUpdate";
+import { createBoard, deleteBoard, fetchBoardList } from '../api/board';
+import { createAction } from '../utils/action';
+import { FETCH_BOARD_DETAIL } from './boardDetail';
+import { UPDATE_BOARD } from './boardDetailUpdate';
 
 export const FETCH_BOARDS = createAction('FETCH_BOARDS');
 export const CREATE_BOARD = createAction('CREATE_BOARD');
@@ -37,20 +37,19 @@ const boardStore = {
       state.loading = false;
     },
     [UPDATE_BOARD.SUCCESS](state, updatedBoard) {
-      state.list = state.list.map(board => {
+      state.list = state.list.map((board) => {
         if (updatedBoard.id === board.id) {
-          return updatedBoard
-        } else {
-          return board
+          return updatedBoard;
         }
-      })
+        return board;
+      });
     },
     [DELETE_BOARD.REQUEST](state) {
       state.loading = true;
     },
-    [DELETE_BOARD.SUCCESS](state,boardId) {
+    [DELETE_BOARD.SUCCESS](state, boardId) {
       state.loading = false;
-      state.list = state.list.filter(board => board.id !== boardId)
+      state.list = state.list.filter(board => board.id !== boardId);
     },
     [DELETE_BOARD.FAILURE](state) {
       state.loading = false;
@@ -80,19 +79,19 @@ const boardStore = {
         commit(FETCH_BOARDS.FAILURE);
       }
     },
-    async [DELETE_BOARD.REQUEST]({commit,rootState,state,dispatch}, params) {
+    async [DELETE_BOARD.REQUEST]({ commit, rootState, state, dispatch }, params) {
       commit(DELETE_BOARD.REQUEST);
       try {
-        const {boardId} = params;
-        await deleteBoard({boardId});
+        const { boardId } = params;
+        await deleteBoard({ boardId });
         const detailState = rootState.boardDetail;
         const currentBoard = detailState.board;
         commit(DELETE_BOARD.SUCCESS, boardId);
         const currentList = state.list;
-        if (!currentBoard || currentBoard.id === boardId){
+        if (!currentBoard || currentBoard.id === boardId) {
           if (currentList.length > 0) {
-            const boardId = currentList[0].id;
-            dispatch(FETCH_BOARD_DETAIL.REQUEST, { boardId });
+            const { id } = currentList[0];
+            dispatch(FETCH_BOARD_DETAIL.REQUEST, { boardId: id });
           }
         }
       } catch (e) {
